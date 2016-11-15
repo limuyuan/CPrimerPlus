@@ -26,4 +26,4 @@ the executable file also has machine code for the library routines you use and f
 编译器把高级语言程序源代码翻译成计算机能理解的机器语言指令代码（目标代码）。
 
 ## 链接器的任务是什么？
-链接器的把目标代码、库函数
+链接器把编写的目标代码、系统的标准启动代码和库代码3部分合并成一个可执行文件。
