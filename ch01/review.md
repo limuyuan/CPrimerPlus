@@ -4,7 +4,7 @@
 
 ## 解释源代码文件(source code file)、目标代码文件(object code file)和可执行文件(executable file)有什么区别？
 
-源代码文件('source code file')：用C语言编写程序时，编写的内容被存储在文本文件中，该文件被称为源代码文件。  
+源代码文件(source code file)：用C语言编写程序时，编写的内容被存储在文本文件中，该文件被称为源代码文件。  
 
 目标代码文件(object code file)、可执行文件(executable file)：
 * 编译器把源代码转换成中间(intermediate)代码，链接器把中间代码和其他代码合并，生成可执行文件。  
