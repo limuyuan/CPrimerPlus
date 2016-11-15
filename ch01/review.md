@@ -14,3 +14,13 @@
 **目标文件中只包含编译器为你编写的代码翻译的机器语言代码，可执行文件中还包含你编写的程序中使用的库函数和启动代码的机器代码。**
 >However, the object file contains the machine language translation only for the code you used, but
 the executable file also has machine code for the library routines you use and for the startup code.
+
+## 编程的7个主要步骤是什么？
+
+>1. 定义程序的目标
+2. 设计程序
+3. 编写代码
+4. 编译
+5. 运行程序
+6. 测试和调试程序
+7. 维护和修改程序
