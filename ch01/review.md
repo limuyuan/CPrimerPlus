@@ -12,3 +12,5 @@
 * 虽然目标文件中包含机器语言代码，但是并不能直接运行，因为目标文件中储存的是编译器翻译的源代码，还不是一个完整的程序（缺失启动代码和库函数）。通过链接器，把编写的目标代码、系统的标准启动代码和库代码这三部分合并成一个文件，才生成了最终的可执行文件(executable file)。
 
 **简而言之，目标文件中只包含编译器为你编写的代码翻译的机器语言代码，可执行文件中还包含你编写的程序中使用的库函数和启动代码的机器代码。**
+'However, the object file contains the machine language translation only for the code you used, but
+the executable file also has machine code for the library routines you use and for the startup code.'
