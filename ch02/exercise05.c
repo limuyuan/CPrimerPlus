@@ -5,6 +5,7 @@ void ic(void);
 int main(void)
 {
 	br();
+	printf(", ");
 	ic();
 	ic();
 	br();
