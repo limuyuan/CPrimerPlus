@@ -51,3 +51,36 @@ int main(void) /* 该程序打印一年有多少周 */
     return 0;
 }
 ```
+> 对比答案发现，输出一句答案多添加了一个换行符`\n`，即`printf("There are %d weeks in a year.\n",s);`，虽然本程序只有一句输出，并且加换行符不会影响看起来的输出结果，但是加上换行符某种程度上来说是一个好习惯，以后的练习中多加注意。
+
+## 假设下面的4个例子都是完整程序的一部分，它们都输出什么结果？
+```c
+a.  printf(Baa Baa Black Sheep.");
+    Printf("Have you any wool?\n");
+b.  printf("Begone!\nO Creature of lard!\n");
+c.  printf("What?\nNo/nfish?\n");
+d.  int num;
+    num = 2;
+    printf("%d + %d = %d", num, num, num + num);
+```
+a.
+```
+Baa Baa Baa Black Sheep.Have you any wool?
+```
+
+b.
+```
+Begone!  
+O Creature of lard!
+```
+
+c.
+```
+What?  
+No/nfish?
+```
+    
+d.
+```
+2 + 2 = 4
+```
