@@ -2,7 +2,7 @@
 #include <stdio.h>
 void jolly(void);
 void deny(void);
-int main()
+int main(void)
 {
 	jolly();
 	jolly();
