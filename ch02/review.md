@@ -10,7 +10,7 @@ C语言例子：int printf(main()):
 ## 什么是语义错误？写出一个英语例子和C语言例子。
 语义错误是指意思上的错误。在C语言中，如果遵循了C规则，但是结果不正确，那就是犯了语义错误。
 
-英语例子：Today I see music never.  
+英语例子： The github today has a delicious computer.  
 C语言例子：a_minus_b = a + b;
 
 ## Indiana Sloth 编写了下面的程序，并征求你的意见。请帮助他评定。
