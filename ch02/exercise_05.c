@@ -6,6 +6,7 @@ int main(void)
 {
 	br();
 	ic();
+	ic();
 	br();
 	printf("\n");
 	return 0;
