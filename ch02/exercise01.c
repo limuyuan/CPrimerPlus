@@ -4,6 +4,6 @@ int main(void)
 	printf("Li Muyuan\n");
 	printf("Li\nMuyuan\n");
 	printf("Li");
-    printf(" Muyuan\n");
+	printf(" Muyuan\n");
 	return 0;
 }
