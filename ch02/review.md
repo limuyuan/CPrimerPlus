@@ -4,7 +4,7 @@ C程序包含一个或多个函数，它们是C程序的基本模块。
 ## 什么是语法错误？写出一个英语例子和C语言例子。
 C语言的语法错误指的是，把有效的C符号用错了地方。
 
-英语例子：good the today is wheater very  
+英语例子：Good the today is wheater very!  
 C语言例子：int printf(main()):
 
 ## 什么是语义错误？写出一个英语例子和C语言例子。
