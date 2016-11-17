@@ -6,6 +6,6 @@ int main(void)
 	
 	age = 25;
 	days = 365 * age;	//assuming each year has 365 days
-	printf("You've past about %d days since you born!\n", age);
+	printf("You've past about %d days since you born!\n", days);
 	return 0;
 }

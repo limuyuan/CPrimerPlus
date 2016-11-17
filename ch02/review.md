@@ -4,7 +4,7 @@ C程序包含一个或多个函数，它们是C程序的基本模块。
 ## 什么是语法错误？写出一个英语例子和C语言例子。
 C语言的语法错误指的是，把有效的C符号用错了地方。
 
-英语例子：Good the today is wheater very!  
+英语例子：Good the today is weather very!  
 C语言例子：int printf(main()):
 
 ## 什么是语义错误？写出一个英语例子和C语言例子。
@@ -24,7 +24,7 @@ int main{void} /* 该程序打印一年有多少周 /*
     print(There are s weeks in a year.);
     return 0;
 ```
-该程序有多处语法错误：
+该程序有多处语法错误和一处语义错误：
 
 1. include前应加`#`，标准库的名字输入错误，应为`stdio.h`，并用`<>`或`""`将标准库的名字包含在内
 2. 注释结尾符号错误，应改为`/* 该程序打印一年有多少周 */`，另外main函数的括号应改为圆括号即`main()`
