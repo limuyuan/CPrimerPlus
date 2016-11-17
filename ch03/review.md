@@ -7,13 +7,38 @@
 a. 根据地域大小，32767人及以内可用`short`，65535人及以内可用`unsigned short`，65535人以上可用`int`
 
 b. ~~考虑到货币单位不同，选择`unsigned short`类型可尽可能降低溢出风险~~  
-价格通常不是一个整数，对精度要求也不高，可以选择`float`类型。**C语言中无`unsigned float`！！！**参见StackOverflow:[Why doesn't C have unsigned floats?](http://stackoverflow.com/questions/512022/why-doesnt-c-have-unsigned-floats)
+价格通常不是一个整数，对精度要求也不高，可以选择`float`类型。**C语言中无`unsigned float`！！！** 参见StackOverflow : [Why doesn't C have unsigned floats?](http://stackoverflow.com/questions/512022/why-doesnt-c-have-unsigned-floats)
 
 c. 选择`char`储存字符
 
 d. 节省存储空间，选择`unsigned short`
 
 ## 在什么情况下要用`long`类型的变量代替`int`类型的变量？
+
 如果一个数超出了`int`的取值范围，且在`long`的取值范围内时，使用`long`类型。另外需要注意：如果在`long`类型和`int`类型占用空间相同的机器上编写代码，当确实需要32位整数时，应使用`long`类型而不是`int`类型，以便把程序移植到16位机后仍然可以正常工作。
 
 ## 使用哪些可移植的数据类型可以获得32位有符号整数？选择的理由是什么？
+查阅附录B.6 参考资料VI：扩展的整数类型
+
+如果需要正好获得32位的整数，选择`int32_t`类型  
+如果要保证至少可以储存32位整数的最小类型，选择`int32_least_t`类型
+如果要为32位整数提供最快的计算速度，选择`int32_fast_t`类型
+
+> 如果某系统的最小整数类型是16位，可能不会定义`int8_t`类型。尽管如此，该系统仍可使用`int8_least_t`类型，但可能把该类型实现为16位的整数类型。
+
+## 指出下列常量的类型和含义（如果有的话）
+> a. '\b'  
+> b. 1066  
+> c. 99.44  
+> d. 0XAA  
+> e. 2.0e30
+
+a. `char`类型，储存为`int`类型，含义为转义序列中的*回退符*
+
+b. `int`类型，整型常量
+
+c. `double`类型，双精度浮点型常量
+
+d. `int`类型，整型常量，用16进制表示
+
+e. `double`，双精度浮点型常量，用指数形式表示
