@@ -71,7 +71,7 @@ int main(void)
     float g, h;
     float tax, rate;
 
-    g = e21;
+    g = 1e21;   //答案中给出的参考数字
     tax = race * g;
 
     return 0;
