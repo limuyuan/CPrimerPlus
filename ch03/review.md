@@ -12,3 +12,5 @@ b. ~~考虑到货币单位不同，选择`unsigned short`类型可尽可能降�
 c. 选择`char`储存字符
 
 d. 节省存储空间，选择`unsigned short`
+
+## 在什么情况下要用`long`类型的变量代替`int`类型的变量？
