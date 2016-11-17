@@ -86,5 +86,5 @@ int main(void)
 	printf("double = %e, double / 1.0e5f = %e\n", uf_double, uf_double / 1e5f);
 	printf("long double = %Le, long double / 1.0e5f = %Le\n", uf_ldouble, uf_ldouble / 1e5f);
 
-
+	return 0;
 }
