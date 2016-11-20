@@ -43,7 +43,7 @@ a. `37.5`
 b. `1.5`  
 c. `35`  
 d. `37`  
-e. `37.5`
+e. `37.5`  
 f. `35.0`
 
 ## 请找出下面的程序中的错误：
@@ -89,5 +89,54 @@ int main(void)
 	return 0;
 }
 ```
-> - 两个整除导致舍位，除了将变量`i`声明为`float`类型外，答案提供了另外一种方法：`n = 1.0 / i;`  
+> - 两个整数相除导致舍位，除了将变量`i`声明为`float`类型外，答案提供了另外一种方法：`n = 1.0 / i;`  
 > - `printf()`格式化字符串中没有换行符`\n`，这将导致数字被打印成一行（我以为加了个空格就是想要打在一行呢:joy:
+
+## 这是程序清单5.9的另一个版本。从表面上看，该程序只使用了一条`scanf()`语句，比程序清单5.9简单。请找出不如原版之处：
+
+```c
+#include <stdio.h>
+#define S_TO_M 60
+int main(void)
+{
+	int sec, min, left;
+	prinf("This program converts seconds to minutes and ");
+	printf("seconds.\n");
+	printf("Just enter the number of seconds.\n");
+	printf("Enter 0 to end the program.\n");
+	while(sec > 0){
+		scanf("%d", &sec);
+		min = sec / S_TO_M;
+		left = sec & S_TO_M;
+		printf("%d sec is %d min, %d sec. \n", sec, min, left);
+		printf("Next input?\n");
+	}
+	printf("Bye!\n");
+	return 0;
+}
+```
+程序清单5.9：
+```c
+//min_sec.c
+#include <stdio.h>
+#define SEC_PER_MIN 60
+int main(void)
+{
+	int sec, min, left;
+
+	printf("Convert seconds to minutes and seconds!\n");
+	printf("Enter the number of seconds (<=0 to quit):\n");
+	scanf("%d", &sec);
+	while (sec > 0)
+	{
+		min = sec / SEC_PER_MIN;
+		left = sec % SEC_PER_MIN;
+		printf("%d seconds is %d minutes, %d seconds.\n", sec, min, left);
+		printf("Enter next alue (<=0 to quit):\n");
+		scanf("%d", &sec);
+	}
+	printf("Done!\n");
+
+	return 0;
+}
+```
