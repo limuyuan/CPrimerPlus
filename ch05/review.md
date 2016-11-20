@@ -107,7 +107,7 @@ int main(void)
 	while(sec > 0){
 		scanf("%d", &sec);
 		min = sec / S_TO_M;
-		left = sec & S_TO_M;
+		left = sec % S_TO_M;
 		printf("%d sec is %d min, %d sec. \n", sec, min, left);
 		printf("Next input?\n");
 	}
@@ -132,7 +132,7 @@ int main(void)
 		min = sec / SEC_PER_MIN;
 		left = sec % SEC_PER_MIN;
 		printf("%d seconds is %d minutes, %d seconds.\n", sec, min, left);
-		printf("Enter next alue (<=0 to quit):\n");
+		printf("Enter next value (<=0 to quit):\n");
 		scanf("%d", &sec);
 	}
 	printf("Done!\n");
@@ -140,6 +140,12 @@ int main(void)
 	return 0;
 }
 ```
+
+1. 可读性：修改过的版本将原本可以在一条语句中显示完毕的句子分成了两条语句，而第二条语句只有一个单词，降低了可读性。另外，根据`while`循环判断条件，任何<=0的输入值都将跳过循环导致退出，原版的提示信息`(<=0 to quit)`更加友好。相比之下，原版的`SEC_PER_MIN`也比`S_TO_M`更加清晰易懂。
+2. 原版程序在循环之前为变量`sec`赋值，可确保程序按照编写者意图运行，修改后的程序在第一次进入循环前，变量`sec`的值是未定义的，这可能很导致程序不会进入计算循环而直接退出。
+
+> VS2015通过了编译但是提示了一条警告信息`warning C4700: 使用了未初始化的局部变量“sec”`并在运行时弹出了一个错误窗口  
+> 另外，答案提示了修改后程序的另外一个问题：当最后输入`0`结束程序时，在循环结束之前不会检查`sec`，所以`0`也被打印了出来
 
 ## 下面的程序将打印出什么内容？
 
@@ -221,13 +227,47 @@ int main(void)
 	int n = 0;
 
 	while (n++ < TEN)
-		printf("5d", n);
+		printf("%5d", n);
 	printf("\n");
 	return 0;
 }
 ```
 
+推测运行结果：
+
+    1  
+		2  
+		3  
+		4  
+		5  
+		6  
+		7  
+		8  
+		9  
+   10
+
+实际运行结果：
+
+>     1    2    3    4    5    6    7    8    9   10  
+>  错误原因：把`while`循环体外面的打印换行符一句当成了循环体内的语句了，实际上只打印一个换行符
+
 ## 修改上一个程序，使其可以打印字母a~g
+
+```c
+#include <stdio.h>
+int main(void)
+{
+	char n = 'a';
+
+	while (n < ('g' + 1))
+	{
+		printf("%5c", n);
+		n++;
+	}
+	printf("\n");
+	return 0;
+}
+```
 
 ## 假设下面是完整程序中的一部分，它们分别打印什么？
 
@@ -242,7 +282,7 @@ b.
 	int x = 100;
 
 	while (x++ < 103)
-		printf("%4d\n“, x);
+		printf("%4d\n", x);
 		printf("%4d\n", x);
 
 c.
@@ -253,12 +293,25 @@ c.
 		printf("%c", ch);
 		ch++;
 	}
+	printf("%c\n", ch);
 ```
+a. `   1   2   3`[X]
+
+> 推测错误，正确答案为`   1   2`，注意`while`循环测试条件是`++x`而不是`x++`，先递增然后使用值
+
+b.
+```
+ 101
+ 102
+ 103
+ 104
+```
+c. `stuvw`
 
 ## 下面的程序会打印出什么？
 
 ```c
-#define MESG "COMPUtER BYTES DOG"
+#define MESG "COMPUTER BYTES DOG"
 #include <stdio.h>
 int main(void)
 {
@@ -271,6 +324,18 @@ int main(void)
 	return 0;
 }
 ```
+会一直在屏幕上打出`COMPUTER BYTES DOG`：  
+COMPUTER BYTES DOG  
+COMPUTER BYTES DOG  
+COMPUTER BYTES DOG  
+COMPUTER BYTES DOG  
+COMPUTER BYTES DOG  
+COMPUTER BYTES DOG  
+COMPUTER BYTES DOG  
+...
+
+原因：`n++;`未包含在`while`循环体内
+
 
 ## 分别编写一条语句，完成下列各任务（或者说，使其具有以下副作用）：
 
@@ -279,9 +344,19 @@ int main(void)
 > c. 将`a`与`b`之和的两倍赋给`c`  
 > d. 将`a`与[`b`的两倍]之和赋给`c`
 
+a. `x = x + 10;`  
+b. `x++;`  
+c. `c = (a + b) * 2;`  
+d. `c = a + b * 2;`
+
 ## 分别编写一条语句，完成下列各任务：
 
 > a. 将变量`x`的值减少1  
 > b. 将`n`除以`k`的余数赋给`m`  
 > c. `q`除以[`b`减去`a`]，并将结果赋给`p`  
 > d. `a`与`b`之和除以`c`与`d`的乘积，并将结果赋给`x`
+
+a. `x--;`  
+b. `m = n % k;`  
+c. `p = q / (b - a);`  
+d. `x = (a + b) / (c * d);`
