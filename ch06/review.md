@@ -1,4 +1,4 @@
-## 写出执行完下列各行后`quack`的值是多少。后5行中使用的是第1行的`quack`值
+﻿## 写出执行完下列各行后`quack`的值是多少。后5行中使用的是第1行的`quack`值
 
 ```c
   int quack = 2;
@@ -139,7 +139,6 @@ int main(void)
 }
 ```
 
-
 ## 编写一个程序打印下面的图案，要求使用嵌套循环：
 
 ```
@@ -148,7 +147,23 @@ $$$$$$$$
 $$$$$$$$
 $$$$$$$$
 ```
+代码如下：
+```c
+#include <stdio.h>
+int main()
+{
+	int i, j;
 
+	for (i = 0; i < 4; i++)
+	{
+		for (j = 0; j < 8; j++)
+			printf("&");
+		printf("\n");
+	}
+	
+	return 0;
+}
+```
 ## 下面的程序各打印什么内容？
 
 ```c
@@ -180,6 +195,14 @@ int main(void)
 	return 0;
 }
 ```
+a.  
+推测输出结果：`Hi! Hi! Hi! Bye! `(Bye!后面有一个空格)  
+实际输出结果：`Hi! Hi! Hi! Bye! Bye! Bye! Bye! Bye!`(Bye!后面有一个空格) 
+
+错误原因：误认为`do`部分以分号结束后，和下面的`while`不发生关系。事实上`do`不可以单独使用，后面必须要接`while`循环语句！
+
+b.  
+`ACGM`
 
 ## 假设用户输入的是`Go west, young man!`，下面各程序的输出是什么？（在ASCII码中，`!`紧跟在空格字符后面）
 
@@ -243,6 +266,17 @@ int main(void)
 	return 0;
 }
 ```
+a.  
+`Go west, youn`
+
+b.  
+`Hp!xftu-zpvo`  (英文逗号`','`的下一个ASCII值对应的字符为连字符`'-'`)
+
+c.  
+`Go west, young`
+
+d.  
+`$o west, youn`
 
 ## 下面的程序打印什么内容？
 
