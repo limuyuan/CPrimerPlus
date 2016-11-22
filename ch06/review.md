@@ -31,6 +31,8 @@ for (value = 36; value > 0; value /= 2)
 
 如果`value`是`double`类型，计算过程中会导致无限循环（直到超过`double`类型的精度表示范围），又因`printf`以整型形式打印数字，会在最后出现很多个数字`0`
 
+> 答案中指明了这种现象的名词：浮点数下溢(*underflow*)
+
 实际运行结果：
 
 ```
@@ -41,7 +43,7 @@ for (value = 36; value > 0; value /= 2)
 4567372836864184329216460823041152576288144 72 36 18  9  4  2  1请按任意键继续.
 . .
 ```
-为了试图分隔开后面的长数字，修改格式化字符串为`" %3d"`，结果如下：
+确实出现了很多个`0`，但是在很多个`0`的后面又莫名其妙多出了一堆整数。为了分离出后面的长数字，修改格式化字符串为`" %3d"`，结果如下：
 ```
 ...(很多个0)
 0   0   0   0   0 -2147483648 1073741824 536870912 -1879048192 1207959552 603
@@ -57,7 +59,7 @@ for (value = 36; value > 0; value /= 2)
 6e-321 1.423e-321 7.115e-322 3.557e-322 1.779e-322 8.893e-323 4.447e-323 1.976e-
 323 9.881e-324 4.941e-324请按任意键继续. . .
 ```
-可以看到，以整型输出的`double`类型变量实际上一直在减小，应该是`double`在内存中被截断为`int`之后导致了显示为整数的情况。
+可以看到，以整型输出的`double`类型变量实际上一直在减小，应该是`double`在内存中被截断读取为`int`之后导致了显示为整数的情况。
 
 查看`<float.h>`头文件，找到两个和`double`类型精度有关的明示常量：
 
@@ -67,7 +69,7 @@ for (value = 36; value > 0; value /= 2)
 ```
 可以看出，导致循环终止的原因是，循环中最后一个数字`4.941e-324`除以2之后的结果小于`DBL_TRUE_MIN`的值
 
-至于为什么`<float.h>`中要采用`DBL_MIN`和`DBL_TRUE_MIN`两个具有相同注释的常量的原因，这是另外一个问题，暂且略过，不过查到了这样一个带注释的版本：
+为什么`<float.h>`中要采用`DBL_MIN`和`DBL_TRUE_MIN`两个具有相同注释的常量？我首先利用搜索引擎查到了这样一个带注释的版本：
 ```c
 #ifndef DBL_TRUE_MIN
 /* DBL_TRUE_MIN is a common non-standard extension for the minimum denorm value
@@ -75,8 +77,25 @@ for (value = 36; value > 0; value /= 2)
 #define DBL_TRUE_MIN DBL_MIN
 #endif
 ```
+注释部分大意为，`DBL_TRUE_MIN`是对最小非规格化浮点数[(*Denormal number*)](https://en.wikipedia.org/wiki/Denormal_number)的通用非标准扩充，而`DBL_MIN`才是最小非规格化浮点数的值，并且只在`DBL_TRUE_MIN`未定义时使用。
 
-> 答案中指明了这种现象的正确名词：浮点数下溢(*underflow*)
+*C11标准 §5.2.4.2.2.13*中提到了`DBL_TRUE_MIN`：
+
+> The values given in the following list shall be replaced by constant expressions with implementation-defined (positive) values that are less than or equal to those shown:   
+> — minimum normalized positive floating-point number, b<sup>e<sub>min</sub>−1</sup>  
+> **FLT_MIN 1E-37**  
+> **DBL_MIN 1E-37**  
+> **LDBL_MIN 1E-37**  
+> 
+> — minimum positive floating-point number   
+> **FLT_TRUE_MIN 1E-37**  
+> **DBL_TRUE_MIN 1E-37**  
+> **LDBL_TRUE_MIN 1E-37**  
+> (If the presence or absence of subnormal numbers is indeterminable, then the value is intended to be a positive number no greater than the minimum normalized positive number for the type.)
+
+个人理解：首先，浮点数在计算机中有规格化数和非规格化数两种表示方式。C标准在这里规定了两种浮点数的最小正值。具体值的大小是由实现来定义的（由编译器等来决定），但是不得小于列出的这些值。如果没有确定非规格化数是否会出现，`DBL_TRUE_MIN`的值应该是一个小于等于该类型最小正规格化数`DBL_MIN`的值。
+
+> 本题第2问分析已整理并投稿至SegmentFault，文章链接：[https://segmentfault.com/a/1190000007565915](https://segmentfault.com/a/1190000007565915)
 
 ## 用代码表示以下测试条件：
 
@@ -317,6 +336,33 @@ int main(void)
 	return 0;
 }
 ```
+推测输出结果：
+```
+31|32|33|30|31|32|33
+***
+1
+5
+9
+13
+
+***
+2 6
+4 8
+8 10
+
+***
+======
+=====
+====
+===
+==
+
+```
+实际输出结果除了第一行以外全部正确。实际第一行内容：
+
+`31|32|33|30|31|32|33|`
+
+错误原因：末尾处漏写了一个`|`，不能想当然，要严格按照格式化字符串推测输出，注意细节
 
 ## 考虑下面的声明：
 
@@ -324,13 +370,18 @@ int main(void)
 double mint[10];
 ```
 
-> a. 数组名是什么？  
-> b. 该数组有多少个元素？  
-> c. 每个元素可以储存什么类型的值？
-> d. 下面的哪一个`scanf()`的用法正确？  
-      i. `scanf("%lf", mint[2])`  
-      ii. `scanf("%lf", &mint[2])`  
-      iii. `scanf("%lf", &mint)`  
+- a. 数组名是什么？
+- b. 该数组有多少个元素？
+- c. 每个元素可以储存什么类型的值？
+- d. 下面的哪一个`scanf()`的用法正确？
+    -  i. `scanf("%lf", mint[2])`
+    -  ii. `scanf("%lf", &mint[2])`
+    -  iii. `scanf("%lf", &mint)`
+
+a. 数组名是`mint`  
+b. 该数组有10个元素  
+c. 每个元素可以储存`double`类型的值（理论上也可以储存和`double`类型占用空间位数相同类型的值）  
+d. 引用数组中元素要加`&`，数组名本身则不需要加`&`，故只有ii. `scanf("%lf", &mint[2])`是正确的用法
 
 ## Noah先生喜欢以2计数，所以编写了下面的程序，创建了一个储存2、4、6、8等数字的数组
 
@@ -352,6 +403,9 @@ int main(void)
 	return 0;
 }
 ```
+该程序存在多处错误：
+
+- 
 
 ## 假设要编写一个返回`long`类型值的函数，函数定义中应包含什么？
 
