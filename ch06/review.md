@@ -405,11 +405,55 @@ int main(void)
 ```
 该程序存在多处错误：
 
-- 
+- 数组索引从0开始，而不是1，相应地，`for`循环测试条件也应该减1
+- 根据题意（2,4,6,8），赋值语句应为`by_twos[index] = 2 + 2 * index`
+- 打印数组元素时要加上下标，不能直接使用数组名
+
+修改后的程序为：
+
+```c
+#include <stdio.h>
+#define SIZE 8
+int main(void)
+{
+	int by_twos[SIZE];
+	int index;
+
+	for (index = 0; index <= SIZE - 1; index++)
+		by_twos[index] = 2 * index + 2;
+	for (index = 0; index <= SIZE - 1; index++)
+		printf("%d ", by_twos[index]);
+	printf("\n");
+	return 0;
+}
+
+```
 
 ## 假设要编写一个返回`long`类型值的函数，函数定义中应包含什么？
 
+应该包含函数的返回值类型`long`，和一条`return`语句，返回一个`long`类型的的值。形如：
+
+```c
+long func(int a, char b, ...)
+{
+	long x;
+	...
+	return x;
+}
+```
+
 ## 定义一个函数，接受一个`int`类型的参数，并以`long`类型返回参数的平方值
+
+```c
+long sqt(int n)
+{
+	int n;
+	long n2;
+
+	n2 = n * n;
+	return n2;
+}
+```
 
 ## 下面的程序打印什么内容？
 
@@ -418,9 +462,20 @@ int main(void)
 int main(void)
 {
 	int k;
-	for (k = 1, printf("%d: Hi!\n", k)); printf("k = %d\n", k),
+	for (k = 1, printf("%d: Hi!\n", k); printf("k = %d\n", k),
 		k * k < 26; k += 2, printf("Now k is %d\n", k))
 		printf("k is %d in the loop\n", k);
 	return 0;
 }
 ```
+1. Hi!
+k = 1
+k is 1 in the loop
+Now k is 3
+k = 3
+k is 3 in the loop
+Now k is 5
+k = 5
+k is 5 in the loop
+Now k is 7
+k = 7
