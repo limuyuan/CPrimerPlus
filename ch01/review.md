@@ -1,7 +1,7 @@
-## 对编程而言，*可移植性*意味着什么？
+#### 对编程而言，*可移植性*意味着什么？
 可移植性意味着在一种系统中编写的程序稍作修改或者不修改就能在其他系统中运行。
 
-## 解释源代码文件(source code file)、目标代码文件(object code file)和可执行文件(executable file)有什么区别？
+#### 解释源代码文件(source code file)、目标代码文件(object code file)和可执行文件(executable file)有什么区别？
 源代码文件(source code file)：用C语言编写程序时，编写的内容被存储在文本文件中，该文件被称为源代码文件。
 
 目标代码文件(object code file)、可执行文件(executable file)：
@@ -13,7 +13,7 @@
 >However, the object file contains the machine language translation only for the code you used, but
 the executable file also has machine code for the library routines you use and for the startup code.
 
-## 编程的7个主要步骤是什么？
+#### 编程的7个主要步骤是什么？
 >1. 定义程序的目标
 2. 设计程序
 3. 编写代码
@@ -22,8 +22,8 @@ the executable file also has machine code for the library routines you use and f
 6. 测试和调试程序
 7. 维护和修改程序
 
-## 编译器的任务是什么？
+#### 编译器的任务是什么？
 编译器把高级语言程序源代码翻译成计算机能理解的机器语言指令代码（目标代码）。
 
-## 链接器的任务是什么？
+#### 链接器的任务是什么？
 链接器把编写的目标代码、系统的标准启动代码和库代码3部分合并成一个可执行文件。

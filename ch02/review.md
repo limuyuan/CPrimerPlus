@@ -1,19 +1,19 @@
-## C语言的基本模块是什么？
+#### C语言的基本模块是什么？
 C程序包含一个或多个函数，它们是C程序的基本模块。
 
-## 什么是语法错误？写出一个英语例子和C语言例子。
+#### 什么是语法错误？写出一个英语例子和C语言例子。
 C语言的语法错误指的是，把有效的C符号用错了地方。
 
 英语例子：Good the today is weather very!  
 C语言例子：int printf(main()):
 
-## 什么是语义错误？写出一个英语例子和C语言例子。
+#### 什么是语义错误？写出一个英语例子和C语言例子。
 语义错误是指意思上的错误。在C语言中，如果遵循了C规则，但是结果不正确，那就是犯了语义错误。
 
 英语例子： The github today has a delicious computer.  
 C语言例子：a_minus_b = a + b;
 
-## Indiana Sloth 编写了下面的程序，并征求你的意见。请帮助他评定。
+#### Indiana Sloth 编写了下面的程序，并征求你的意见。请帮助他评定。
 ```c
 include studio.h
 int main{void} /* 该程序打印一年有多少周 /*
@@ -50,7 +50,7 @@ int main(void) /* 该程序打印一年有多少周 */
 ```
 > 对比答案发现，输出一句答案多添加了一个换行符`\n`，即`printf("There are %d weeks in a year.\n",s);`，虽然本程序只有一句输出，并且加换行符不会影响看起来的输出结果，但是加上换行符某种程度上来说是一个好习惯，以后的练习中多加注意。
 
-## 假设下面的4个例子都是完整程序的一部分，它们都输出什么结果？
+#### 假设下面的4个例子都是完整程序的一部分，它们都输出什么结果？
 ```c
 a.  printf(Baa Baa Black Sheep.");
     Printf("Have you any wool?\n");
@@ -82,12 +82,12 @@ d.
 2 + 2 = 4
 ```
 
-## 在`main`、`int`、`function`、`char`、`=`中，哪些是C语言的关键字？
+#### 在`main`、`int`、`function`、`char`、`=`中，哪些是C语言的关键字？
 ~~`main`~~、`int`、`char`是C语言的关键字
 
 > 正确答案：`main`是函数名，`function`是用来描述C语言的一种术语（函数），`=`是运算符(operator)
 
-## 如何以下面的格式输出变量words和lines的值（这里，3020和350代表两个变量的值）？
+#### 如何以下面的格式输出变量words和lines的值（这里，3020和350代表两个变量的值）？
 ```
 There were 3020 words and 350 lines.
 ```
@@ -96,7 +96,7 @@ There were 3020 words and 350 lines.
 printf("There were %d words and %d lines.", words, lines);
 ```
 
-## 考虑下面的程序：
+#### 考虑下面的程序：
 ```c
 #include <stdio.h>
 int main(void)
@@ -126,7 +126,7 @@ a = 5, b = 5
 a = 5, b = 5
 ```
 
-## 考虑下面的程序：
+#### 考虑下面的程序：
 ```c
 #include <stdio.h>
 int main(void)
