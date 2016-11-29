@@ -32,38 +32,43 @@ int main(void)
 	{
 		switch (option)
 		{
-			case 'a':
-				printf("Please enter pounds of artichokes (q to finish):\n");
-				//失败原因：scanf()读取输入失败后会将输入退回，下一次循环的时候使用的直接是上一次输入的'q'，会导致直接跳出循环
-				while (scanf("%lf", &temp) == 1)
-				{
-					apound += temp;
-					printf("More pounds of artichokes? (q to finish)\n");
-				}
-				getchar();
-				getchar();
-				//解决方法：使用两个getchar()，一个接收输入的'q'，另外一个接收换行符（回车）
-				break;
-			case 'b':
-				printf("Please enter pounds of beets (q to finish):\n");
-				while (scanf("%lf", &temp) == 1)
-				{
-					bpound += temp;
-					printf("More pounds of beets? (q to finish)\n");
-				}
-				getchar();
-				getchar();
-				break;
-			case 'c':
-				printf("Please enter pounds of carrots (q to finish):\n");
-				while (scanf("%lf", &temp) == 1)
-				{
-					cpound += temp;
-					printf("More pounds of carrots? (q to finish)\n");
-				}
-				getchar();
-				getchar();
-				break;
+		case 'a':
+			printf("Please enter pounds of artichokes (q to finish):\n");
+			//失败原因：scanf()读取输入失败后会将输入退回，下一次循环的时候使用的直接是上一次输入的'q'，会导致直接跳出循环
+			while (scanf("%lf", &temp) == 1)
+			{
+				apound += temp;
+				printf("More pounds of artichokes? (q to finish)\n");
+			}
+			//解决方法1：使用两个getchar()，一个接收输入的'q'，另外一个接收换行符（回车）
+			//getchar();
+			//getchar();
+			//问题：如果用户输入了多于一个字符，会直接退出订购过程输出结算结果
+
+			//解决方法2：使用while循环跳过输入行的其余部分
+			//while (getchar() != '\n')
+			//	continue;
+			break;
+		case 'b':
+			printf("Please enter pounds of beets (q to finish):\n");
+			while (scanf("%lf", &temp) == 1)
+			{
+				bpound += temp;
+				printf("More pounds of beets? (q to finish)\n");
+			}
+			while (getchar() != '\n')
+				continue;
+			break;
+		case 'c':
+			printf("Please enter pounds of carrots (q to finish):\n");
+			while (scanf("%lf", &temp) == 1)
+			{
+				cpound += temp;
+				printf("More pounds of carrots? (q to finish)\n");
+			}
+			while (getchar() != '\n')
+				continue;
+			break;
 		}
 		if ('q' == option)
 			break;
@@ -98,8 +103,8 @@ int main(void)
 
 	//输出部分
 	printf("\n---------------------------------------------------------\n");
-	printf("Artichokes: $%.2f/pound, you have ordered %.1f pound(s)\n",PRICEA,apound);
-	printf("Beets: $%.2f/pound, you have ordered %.1f pound(s)\n",PRICEB,bpound);
+	printf("Artichokes: $%.2f/pound, you have ordered %.1f pound(s)\n", PRICEA, apound);
+	printf("Beets: $%.2f/pound, you have ordered %.1f pound(s)\n", PRICEB, bpound);
 	printf("Carrots: $%.2f/pound, you have ordered %.1f pound(s)\n", PRICEC, cpound);
 	printf("---------------------------------------------------------\n");
 	printf("Summary:\n\n");
