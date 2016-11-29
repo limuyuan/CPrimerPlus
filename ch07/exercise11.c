@@ -46,8 +46,8 @@ int main(void)
 			//问题：如果用户输入了多于一个字符，会直接退出订购过程输出结算结果
 
 			//解决方法2：使用while循环跳过输入行的其余部分
-			//while (getchar() != '\n')
-			//	continue;
+			while (getchar() != '\n')
+				continue;
 			break;
 		case 'b':
 			printf("Please enter pounds of beets (q to finish):\n");
